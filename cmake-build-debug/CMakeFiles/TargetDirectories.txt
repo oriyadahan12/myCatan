@@ -1,0 +1,3 @@
+/home/magshimim/CLionProjects/myCatan/cmake-build-debug/CMakeFiles/newCatan.dir
+/home/magshimim/CLionProjects/myCatan/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/magshimim/CLionProjects/myCatan/cmake-build-debug/CMakeFiles/rebuild_cache.dir
