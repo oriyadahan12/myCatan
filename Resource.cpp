@@ -7,7 +7,7 @@ std::string resourceToString(Resource resource) {
         case Resource::Wool: return "Wool";
         case Resource::Oats: return "Oats";
         case Resource::Iron: return "Iron";
-        case Resource::Desert: return "None";
         default: return "Unknown";
     }
 }
+

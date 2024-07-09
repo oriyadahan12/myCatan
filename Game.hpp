@@ -3,36 +3,37 @@
 
 #include <vector>
 #include <random>
+#include <string>
 #include "Player.hpp"
 #include "Plot.hpp"
+#include "Board.hpp"
 
+using namespace std;
 class Game {
 public:
-    int numPlayers = 0;
-    Game();
-    void initializeBoard();
-    void addPlayer(const std::string& name);
-    Player& getPlayer(int index);
+    map<Resource,unsigned int> priceRoad = {{Resource::Wood, 1}, {Resource::Brick, 1}};
+    map<Resource, unsigned int> priceVillage = {{Resource::Wood, 1}, {Resource::Brick, 1},{Resource::Wool, 1},{Resource::Oats, 1}};
+    map<Resource, unsigned int> priceCity = {{Resource::Oats, 2}, {Resource::Iron, 3}};
+    map<Resource,unsigned int> priceDev ={{Resource::Iron, 1}, {Resource::Wool, 1}, {Resource::Oats,1}};
+
+    Game(string name1, string name2, string name3);
+    Player& getPlayer(unsigned int index);
     void printBoard() const;
     void printPlayers();
-    void rollDiceAndDistributeResources();
+    void rollDiceAndProcessResult();
 
-    // Methods for placing settlements and cities
-    void placeSettlement(int playerIndex, int plotIndex);
-    void placeCity(int playerIndex, int plotIndex);
+    void placeSettlement(unsigned int playerIndex, unsigned int index);
+    void placeRoad(unsigned int playerIndex, unsigned int index);
+    void upgradeSettlement(unsigned int playerIndex, unsigned int index);
 
-    // Additional methods for interactive gameplay
-    void printAvailablePlots() const; // Print available plots for settlement
-    bool isValidPlotIndex(int plotIndex) const; // Check if plot index is valid
-
-    int getBoardSize();
+    void stealResources();
 
 private:
     std::vector<Player> players;
-    std::vector<Plot> boardPlots;
+    Board board;
     std::mt19937 rng;
 
-    int rollDice();
+    unsigned int rollDice();
 
 };
 

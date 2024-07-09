@@ -2,41 +2,23 @@
 #define PLOT_HPP
 
 #include <vector>
+#include <string>
 #include "Resource.hpp"
 
 class Player; // Forward declaration
 
 class Plot {
 public:
-    enum class Type {
-        Forest,
-        Hills,
-        Pasture,
-        Agricultural,
-        Mountains,
-        Desert
-    };
 
-    Plot(Type type, int number);
+    Plot(Resource type);
 
-    Type getType() const;
-    int getNumber() const;
-    Resource getResourceType() const;
-    void setOwner(Player* player);
-    void addAdjacentSettlement(Player* player);
-    void addAdjacentCity(Player* player);
+    Resource getType() const;
+    std::string toString() const;
 
-    const std::vector<Player*>& getAdjacentSettlements() const;
-    const std::vector<Player*>& getAdjacentCities() const;
-
-    bool isOccupied() const; // New method to check if plot is occupied
 
 private:
-    Type type;
-    int number;
-    Player* owner;
-    std::vector<Player*> adjacentSettlements;
-    std::vector<Player*> adjacentCities;
+    Resource type;
+
 };
 
 #endif // PLOT_HPP

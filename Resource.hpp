@@ -3,13 +3,13 @@
 
 #include <string>
 
-enum class Resource {
-    Wood,
-    Brick,
-    Wool,
-    Oats,
-    Iron,
-    Desert
+enum class Resource: unsigned int {
+    Wood=0,
+    Brick=1,
+    Wool=2,
+    Oats=3,
+    Iron=4,
+    None = 999
 };
 
 std::string resourceToString(Resource resource);

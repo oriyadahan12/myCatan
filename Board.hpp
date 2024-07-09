@@ -2,21 +2,31 @@
 #define BOARD_HPP
 
 #include <vector>
+#include <string>
 #include "Plot.hpp"
 #include "Player.hpp" // Include Player class for reference
+#include "Village.hpp"
+#include "Road.hpp"
 
 class Board {
 public:
-    Board(int rows, int cols); // Constructor with parameters
+    Board(); // Constructor with parameters
 
     void initializePlots(); // Initialization method for the plots
-    void placeInitialSettlements(std::vector<Player>& players); // Declaration of the method
-    Plot& getPlot(int row, int col); // Method to get a specific plot
+    void produce(unsigned int diceNum);
+    void buildRoad(Player& player, unsigned int roadIndex);
+    void buildVillage(Player& player, unsigned int villageIndex);
+    void upgradeVillage(Player& player, unsigned int villageIndex);
+    bool canBuildRoad(Player& player, unsigned int roadIndex) const;
+    bool canBuildVillage(Player& player, unsigned int villageIndex) const;
+    bool canUpgradeVillage(Player& player, unsigned int villageIndex) const;
+    std::string toString() const;
+
 
 private:
-    int rows;
-    int cols;
-    std::vector<std::vector<Plot>> plots;
+    std::vector<Plot> plots;
+    std::vector<Road> roads;
+    std::vector<Village> villages;
 };
 
 #endif // BOARD_HPP

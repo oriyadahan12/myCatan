@@ -16,6 +16,10 @@ add_executable(newCatan
         Plot.cpp
         Resource.cpp
         development_card.cpp
+        Village.cpp
+        Village.hpp
+        Road.cpp
+        Road.hpp
 )
 
 # Include directories
