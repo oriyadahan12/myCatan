@@ -1,3 +1,5 @@
+//oriyati0701@gmail.com
+
 #ifndef RESOURCE_H
 #define RESOURCE_H
 

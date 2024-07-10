@@ -1,4 +1,5 @@
 # Settlers of Catan Simplified
+//oriyati0701@gmail.com
 
 A simplified version of the Settlers of Catan game for three players, implemented in C++. This project simulates resource production, village building, and road construction on a game board.
 

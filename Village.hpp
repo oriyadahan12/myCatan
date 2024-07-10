@@ -1,6 +1,5 @@
 //
-//  Village.hpp
-//  Header file for the Village class in the New Catan game.
+//oriyati0701@gmail.com
 //
 
 #ifndef NEWCATAN_VILLAGE_HPP

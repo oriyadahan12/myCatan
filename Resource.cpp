@@ -1,3 +1,5 @@
+//oriyati0701@gmail.com
+
 #include "Resource.hpp"
 #include <stdexcept>
 
