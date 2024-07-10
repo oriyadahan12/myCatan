@@ -20,6 +20,7 @@ void Village::upgrade(){
         throw std::invalid_argument("Village already upgraded");
     }
 }
-void Village::receive(Resource r){
-        owner->addResource(r,static_cast<unsigned int>(type));
+void Village::receive(Resource r) {
+    if (type == Type::None) return;
+    owner->addResource(r,static_cast<unsigned int>(type));
 }

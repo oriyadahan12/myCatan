@@ -51,63 +51,63 @@ build cmake_object_order_depends_target_newCatan: phony || CMakeFiles/newCatan.d
 
 build CMakeFiles/newCatan.dir/main.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/main.cpp || cmake_object_order_depends_target_newCatan
   DEP_FILE = CMakeFiles/newCatan.dir/main.cpp.o.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
   OBJECT_DIR = CMakeFiles/newCatan.dir
   OBJECT_FILE_DIR = CMakeFiles/newCatan.dir
 
 build CMakeFiles/newCatan.dir/Game.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Game.cpp || cmake_object_order_depends_target_newCatan
   DEP_FILE = CMakeFiles/newCatan.dir/Game.cpp.o.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
   OBJECT_DIR = CMakeFiles/newCatan.dir
   OBJECT_FILE_DIR = CMakeFiles/newCatan.dir
 
 build CMakeFiles/newCatan.dir/Player.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Player.cpp || cmake_object_order_depends_target_newCatan
   DEP_FILE = CMakeFiles/newCatan.dir/Player.cpp.o.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
   OBJECT_DIR = CMakeFiles/newCatan.dir
   OBJECT_FILE_DIR = CMakeFiles/newCatan.dir
 
 build CMakeFiles/newCatan.dir/Board.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Board.cpp || cmake_object_order_depends_target_newCatan
   DEP_FILE = CMakeFiles/newCatan.dir/Board.cpp.o.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
   OBJECT_DIR = CMakeFiles/newCatan.dir
   OBJECT_FILE_DIR = CMakeFiles/newCatan.dir
 
 build CMakeFiles/newCatan.dir/Plot.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Plot.cpp || cmake_object_order_depends_target_newCatan
   DEP_FILE = CMakeFiles/newCatan.dir/Plot.cpp.o.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
   OBJECT_DIR = CMakeFiles/newCatan.dir
   OBJECT_FILE_DIR = CMakeFiles/newCatan.dir
 
 build CMakeFiles/newCatan.dir/Resource.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Resource.cpp || cmake_object_order_depends_target_newCatan
   DEP_FILE = CMakeFiles/newCatan.dir/Resource.cpp.o.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
   OBJECT_DIR = CMakeFiles/newCatan.dir
   OBJECT_FILE_DIR = CMakeFiles/newCatan.dir
 
 build CMakeFiles/newCatan.dir/development_card.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/development_card.cpp || cmake_object_order_depends_target_newCatan
   DEP_FILE = CMakeFiles/newCatan.dir/development_card.cpp.o.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
   OBJECT_DIR = CMakeFiles/newCatan.dir
   OBJECT_FILE_DIR = CMakeFiles/newCatan.dir
 
 build CMakeFiles/newCatan.dir/Village.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Village.cpp || cmake_object_order_depends_target_newCatan
   DEP_FILE = CMakeFiles/newCatan.dir/Village.cpp.o.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
   OBJECT_DIR = CMakeFiles/newCatan.dir
   OBJECT_FILE_DIR = CMakeFiles/newCatan.dir
 
 build CMakeFiles/newCatan.dir/Road.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Road.cpp || cmake_object_order_depends_target_newCatan
   DEP_FILE = CMakeFiles/newCatan.dir/Road.cpp.o.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
   OBJECT_DIR = CMakeFiles/newCatan.dir
   OBJECT_FILE_DIR = CMakeFiles/newCatan.dir

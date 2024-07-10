@@ -11,10 +11,15 @@ Player::Player(const std::string& name)
 }
 
 void Player::addResource(Resource resource, unsigned int amount) {
+    std::cout << "Adding " << amount << " " << resourceToString(resource) << " to " << name << std::endl;
+    if (resources.find(resource) == resources.end())
+        resources[resource] = 0;
+    std::cout << "Before " << std::endl;
     resources[resource] += amount;
+    std::cout << "After " << std::endl;
 }
 
-void Player::removeResource(Resource resource, int amount) {
+void Player::removeResource(Resource resource, unsigned int amount) {
     if (resources[resource] >= amount) {
         resources[resource] -= amount;
     }
@@ -23,7 +28,7 @@ void Player::removeResource(Resource resource, int amount) {
     }
 }
 
-int Player::getResourceCount(Resource resource) const {
+unsigned int Player::getResourceCount(Resource resource) const {
    return resources.at(resource);
 }
 
@@ -42,116 +47,26 @@ void Player::pay(std::map<Resource, unsigned int> price) {
         throw logic_error("Can't afford");
 
     for (const auto& pair : price) {
-        resources[pair.first] -= (int)pair.second;
+        resources[pair.first] -= pair.second;
     }
 }
 
 void Player::receive(std::map<Resource, unsigned int> price) {
     for (const auto& pair : price) {
-        resources[pair.first] += (int)pair.second;
+        resources[pair.first] += pair.second;
     }
 }
 
-int Player::getVictoryPoints() const {
+unsigned int Player::getVictoryPoints() const {
     return victoryPoints;
 }
 
-//void Player::addDevelopmentCard(const DevelopmentCard& card) {
-//    developmentCards.push_back(card);
-//}
-//
-//void Player::useDevelopmentCard(int index) {
-//    if (index >= 0 && index < developmentCards.size()) {
-//        developmentCards.erase(developmentCards.begin() + index);
-//    }
-//}
-//
-//void Player::initiateTrade(Player& otherPlayer,
-//                           const std::map<Resource, int>& offer,
-//                           const std::map<Resource, int>& request,
-//                           std::function<void(bool)> callback) {
-//    for (const auto& pair : offer) {
-//        if (getResourceCount(pair.first) < pair.second) {
-//            callback(false);
-//            return;
-//        }
-//    }
-//    otherPlayer.respondToTrade(*this, offer, request, callback);
-//}
-//
-//void Player::respondToTrade(Player& initiator,
-//                            const std::map<Resource, int>& offer,
-//                            const std::map<Resource, int>& request,
-//                            std::function<void(bool)> callback) {
-//    bool accept = true; // Placeholder, actual logic to determine acceptance
-//    if (accept) {
-//        for (const auto& pair : request) {
-//            if (getResourceCount(pair.first) < pair.second) {
-//                callback(false);
-//                return;
-//            }
-//        }
-//        for (const auto& pair : offer) {
-//            removeResource(pair.first, pair.second);
-//            initiator.addResource(pair.first, pair.second);
-//        }
-//        for (const auto& pair : request) {
-//            addResource(pair.first, pair.second);
-//            initiator.removeResource(pair.first, pair.second);
-//        }
-//        callback(true);
-//    } else {
-//        callback(false);
-//    }
-//}
-//
-//void Player::playDevelopmentCard(int index, Player& target) {
-//    if (index >= 0 && index < developmentCards.size()) {
-//        DevelopmentCard& card = developmentCards[index];
-//        switch (card.getType()) {
-//            case DevelopmentCard::Type::Knight:
-//                // Implement Knight effect
-//                std::cout << "Using Knight card: Move the robber to a new location." << std::endl;
-//                // Example: Move the robber to a new location
-//                // target.moveRobber(newLocation);
-//                break;
-//            case DevelopmentCard::Type::VictoryPoint:
-//                // Implement Victory Point effect
-//                std::cout << "Using Victory Point card: Increase player's victory points." << std::endl;
-//                break;
-//            case DevelopmentCard::Type::Promotion:
-//                // Implement Promotion effect based on promotion type
-//                switch (card.getPromotionType()) {
-//                    case DevelopmentCard::PromotionType::Monopoly:
-//                        // Implement Monopoly effect
-//                        std::cout << "Using Monopoly card: Implement Monopoly effect." << std::endl;
-//                        break;
-//                    case DevelopmentCard::PromotionType::RoadBuilding:
-//                        // Implement Road Building effect
-//                        std::cout << "Using Road Building card: Allow player to build two roads." << std::endl;
-//                        break;
-//                    case DevelopmentCard::PromotionType::YearOfPlenty:
-//                        // Implement Year of Plenty effect
-//                        std::cout << "Using Year of Plenty card: Implement Year of Plenty effect." << std::endl;
-//                        break;
-//                    default:
-//                        break;
-//                }
-//                break;
-//            default:
-//                // Handle other card types if needed
-//                break;
-//        }
-//        // Remove the used card from player's hand
-//        developmentCards.erase(developmentCards.begin() + index);
-//    }
-//}
 std::string Player::getName() const {
     return name;
 }
 
-int Player::sumResources() const {
-    int sum = 0;
+unsigned int Player::sumResources() const {
+    unsigned int sum = 0;
     for (const auto& pair : resources) {
         sum += pair.second;
     }
@@ -164,24 +79,76 @@ void Player::loseHalfResources() {
     }
 }
 
-//void Player::chooseInitialPlots(std::vector<Plot*>& availablePlots) {
-//    std::cout << "Player " << name << ", choose 2 plots for initial settlements:\n";
-//    for (int i = 0; i < 2; ++i) {
-//        int choice;
-//        std::cout << "Available plots:\n";
-//        for (size_t j = 0; j < availablePlots.size(); ++j) {
-//            std::cout << j + 1 << ". Plot number: " << availablePlots[j]->getNumber()
-//                      << ", Resource: " << static_cast<int>(availablePlots[j]->getType()) << "\n";
-//        }
-//        std::cout << "Enter plot number for settlement " << i + 1 << ": ";
-//        std::cin >> choice;
-//        if (choice > 0 && choice <= availablePlots.size()) {
-//            addSettlement(*availablePlots[choice - 1]);
-//            availablePlots.erase(availablePlots.begin() + (choice - 1));
-//        } else {
-//            std::cout << "Invalid choice. Choose again.\n";
-//            --i; // Retry the current selection
-//        }
-//    }
-//}
+void Player::loseResource(Resource r) {
+    resources[r] = 0;
+}
 
+void Player::addDevelopmentCard(DevelopmentCard* card) {
+    if(developmentCards.find(card) != developmentCards.end())
+        developmentCards[card]++;
+    else
+        developmentCards[card] = 1;
+}
+
+DevelopmentCard* stringToCard(string str) {
+    if (str == "Knight") {
+        return new KnightCard();
+    } else if (str == "Monopoly") {
+        return new MonopolyCard();
+    } else if (str == "Points") {
+        return new PointsCard();
+    } else if (str == "Roads") {
+        return new RoadsCard();
+    } else if (str == "Year of plenty") {
+        return new YearOfPlentyCard();
+    }
+    return nullptr;
+}
+
+void Player::playDevelopmentCard(string str, Game& game) {
+    DevelopmentCard* card = stringToCard(str);
+    if (developmentCards.find(card) == developmentCards.end() || developmentCards[card] == 0) {
+        delete card;
+        throw std::logic_error("Player does not have this card");
+    }
+
+    card->play(*this, game);
+    developmentCards[card]--;
+    delete card;
+}
+
+void Player::removeCard(string str){
+    DevelopmentCard* card = stringToCard(str);
+    if (developmentCards.find(card) == developmentCards.end() || developmentCards[card] == 0) {
+        delete card;
+        throw std::logic_error("Player does not have this card");
+    }
+
+    developmentCards[card]--;
+    delete card;
+}
+
+unsigned int Player::numCards(std::string str) const {
+    DevelopmentCard* card = stringToCard(str);
+    if (developmentCards.find(card) == developmentCards.end()) {
+        delete card;
+        return 0;
+    }
+
+    delete card;
+    return developmentCards.at(card);
+}
+
+void Player::printResources() const {
+    cout << "Resources:" << endl;
+    for (const auto& pair : resources) {
+        cout << resourceToString(pair.first) << ": " << pair.second << endl;
+    }
+}
+
+void Player::printCards() const {
+    cout << "Development Cards:" << endl;
+    for (const auto& pair : developmentCards) {
+        cout << pair.first->toString() << ": " << pair.second << endl;
+    }
+}

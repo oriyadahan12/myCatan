@@ -44,10 +44,11 @@ void Board::produce(unsigned int dicenum){
     if(dicenum == 7 || dicenum < 2 || dicenum > 12){
         throw logic_error("Invalid dice number");
     }
+
     vector<unsigned int> plotsToProduce = dice_results.at(dicenum);
-    for (unsigned int i = 0; i < plotsToProduce.size(); ++i) {
+    for (unsigned int i = 0; i < plotsToProduce.size(); i++) {
         unsigned int curr = plotsToProduce[i];
-        for (unsigned int j = 0; j < SETTELEMENTS[curr].size(); ++j) {
+        for (unsigned int j = 0; j < SETTELEMENTS[curr].size(); j++) {
             villages[SETTELEMENTS[curr][j]].receive(plots[curr].getType());
         }
     }
@@ -91,12 +92,22 @@ void Board::buildRoad(Player& player, unsigned int roadIndex)
     }
 }
 
-void Board::buildVillage(Player& player, unsigned int villageIndex){
-    if(canBuildVillage(player, villageIndex)){
-        villages[villageIndex].build(player);
+void Board::buildVillage(Player& player, unsigned int villageIndex, bool first){
+    if(first){
+        if(canBuildFirstVillage(player, villageIndex)){
+            villages[villageIndex].build(player);
+        }
+        else{
+            throw logic_error("Cannot build first village");
+        }
     }
     else{
-        throw logic_error("Cannot build village");
+        if(canBuildVillage(player, villageIndex)){
+            villages[villageIndex].build(player);
+        }
+        else{
+            throw logic_error("Cannot build village");
+        }
     }
 }
 
@@ -114,26 +125,27 @@ bool Board::canBuildRoad(Player& player, unsigned int roadIndex) const
 {
     for(unsigned int i = 0; i < SETTELMENTS_ROADS.size(); i++)
     {
-        for(unsigned int j = 0; j <SETTELMENTS_ROADS[i].size(); j++){
-            if(SETTELMENTS_ROADS[i][j] == roadIndex){
-                if(roads[i].isBuilt() && roads[i].getOwner() == &player){
+        for(unsigned int j = 0; j < SETTELMENTS_ROADS[i].size(); j++){
+            if (SETTELMENTS_ROADS[i][j] == roadIndex) { // village i is connected to road j
+                if (villages[i].isbuilt() && villages[i].getOwner() == &player)
                     return true;
+
+                for (unsigned int k = 0; k < SETTELMENTS_ROADS[i].size(); k++) {
+                    if (roads[SETTELMENTS_ROADS[i][k]].isBuilt() && roads[SETTELMENTS_ROADS[i][k]].getOwner() == &player)
+                        return true;
                 }
             }
         }
-
     }
+
+
     return false;
 }
 
 bool Board::canBuildVillage(Player& player, unsigned int villageIndex) const
 {
-    for(unsigned int i = 0; i < SETTELMENTS_NEIGHBORS[villageIndex].size(); i++)
-    {
-        if(villages[SETTELMENTS_NEIGHBORS[villageIndex][i]].isbuilt() == 0){
-            return false;
-        }
-    }
+    if (!canBuildFirstVillage(player, villageIndex)) return false;
+
     for(unsigned int i = 0; i < SETTELMENTS_ROADS[villageIndex].size(); i++)
     {
         if(roads[SETTELMENTS_ROADS[villageIndex][i]].isBuilt() && roads[SETTELMENTS_ROADS[villageIndex][i]].getOwner() == &player){
@@ -157,4 +169,14 @@ std::string Board::toString() const {
         cout << i << ": " << plots[i].toString() << endl;
     }
     return std::string();
+}
+
+bool Board::canBuildFirstVillage(Player &player, unsigned int villageIndex) const {
+    for(unsigned int i = 0; i < SETTELMENTS_NEIGHBORS[villageIndex].size(); i++)
+    {
+        if (villages[SETTELMENTS_NEIGHBORS[villageIndex][i]].isbuilt()){
+            return false;
+        }
+    }
+    return true;
 }

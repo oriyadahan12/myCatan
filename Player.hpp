@@ -6,7 +6,7 @@
 #include <vector>
 #include <map>
 #include <functional>
-#include "Plot.hpp" // Include Plot class definition
+#include "Plot.hpp"
 #include "development_card.hpp"
 
 class Player {
@@ -14,40 +14,37 @@ public:
     Player(const std::string& name);
 
     void addResource(Resource resource, unsigned int amount);
-    void removeResource(Resource resource, int amount);
-    int getResourceCount(Resource resource) const;
+    void removeResource(Resource resource, unsigned  int amount);
+    unsigned int getResourceCount(Resource resource) const;
+
+    void printResources() const;
+    void printCards() const;
 
     bool canAfford(std::map<Resource, unsigned int> price) const;
     void pay(std::map<Resource, unsigned int> price);
     void receive(std::map<Resource, unsigned int> price);
 
-    int getVictoryPoints() const;
-    int sumResources() const;
+    unsigned int getVictoryPoints() const;
+    unsigned int sumResources() const;
     void loseHalfResources();
+    void loseResource(Resource);
 
-//    void addDevelopmentCard(const DevelopmentCard& card);
-//    void useDevelopmentCard(int index);
-//    void playDevelopmentCard(int index, Player& target);
-//
-//    void initiateTrade(Player& otherPlayer,
-//                       const std::map<Resource, int>& offer,
-//                       const std::map<Resource, int>& request,
-//                       std::function<void(bool)> callback);
-//
-//    void respondToTrade(Player& initiator,
-//                        const std::map<Resource, int>& offer,
-//                        const std::map<Resource, int>& request,
-//                        std::function<void(bool)> callback);
+    void addVictoryPoint(unsigned int amount) { victoryPoints += amount; }
+
+    void addDevelopmentCard(DevelopmentCard* card);
+    void playDevelopmentCard(string str, Game&);
+    unsigned int numCards() const { return developmentCards.size(); }
+    unsigned int numCards(string) const;
+    void removeCard(string);
 
     std::string getName() const;
 
 
 private:
     std::string name;
-    std::map<Resource, int> resources;
-    std::vector<DevelopmentCard> developmentCards;
-    std::vector<Plot*> ownedPlots;
-    int victoryPoints;
+    std::map<Resource, unsigned int> resources;
+    std::map<DevelopmentCard*, unsigned int> developmentCards;
+    unsigned int victoryPoints;
 
 };
 

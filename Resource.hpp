@@ -14,4 +14,6 @@ enum class Resource: unsigned int {
 
 std::string resourceToString(Resource resource);
 
+Resource intToResource(unsigned int);
+
 #endif // RESOURCE_H
