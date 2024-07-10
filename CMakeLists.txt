@@ -20,6 +20,10 @@ add_executable(newCatan
         Village.hpp
         Road.cpp
         Road.hpp
+        Tests/testPlayer.cpp
+        Tests/TestCounter.cpp
+        Tests/testBoard.cpp
+        Tests/testGame.cpp
 )
 
 # Include directories

@@ -1,8 +1,10 @@
 #include "Player.hpp"
 
 using namespace std;
+
 Player::Player(const std::string& name)
-        : name(name), victoryPoints(2) {
+        : name(name), victoryPoints(0) {
+    // Initialize all resources to zero initially
     resources[Resource::Wood] = 0;
     resources[Resource::Brick] = 0;
     resources[Resource::Wool] = 0;
@@ -11,29 +13,18 @@ Player::Player(const std::string& name)
 }
 
 void Player::addResource(Resource resource, unsigned int amount) {
-    std::cout << "Adding " << amount << " " << resourceToString(resource) << " to " << name << std::endl;
     if (resources.find(resource) == resources.end())
         resources[resource] = 0;
-    std::cout << "Before " << std::endl;
     resources[resource] += amount;
-    std::cout << "After " << std::endl;
 }
 
-void Player::removeResource(Resource resource, unsigned int amount) {
-    if (resources[resource] >= amount) {
-        resources[resource] -= amount;
-    }
-    else{
-        throw std::logic_error("Not enough resources to remove");
-    }
-}
 
 unsigned int Player::getResourceCount(Resource resource) const {
-   return resources.at(resource);
+    return resources.at(resource);
 }
 
 
-bool Player::canAfford(map<Resource, unsigned int>price) const {
+bool Player::canAfford(std::map<Resource, unsigned int> price) const {
     for (const auto& pair : price) {
         if (resources.at(pair.first) < pair.second) {
             return false;
@@ -79,15 +70,16 @@ void Player::loseHalfResources() {
     }
 }
 
-void Player::loseResource(Resource r) {
-    resources[r] = 0;
+void Player::loseResource(Resource r, unsigned int amount) {
+    resources[r] -= amount;
 }
 
-void Player::addDevelopmentCard(DevelopmentCard* card) {
-    if(developmentCards.find(card) != developmentCards.end())
-        developmentCards[card]++;
-    else
-        developmentCards[card] = 1;
+void Player::addDevelopmentCard(string str) {
+    if (developmentCards.find(str) != developmentCards.end()) {
+        developmentCards[str]++;
+    } else {
+        developmentCards[str] = 1;
+    }
 }
 
 DevelopmentCard* stringToCard(string str) {
@@ -107,36 +99,28 @@ DevelopmentCard* stringToCard(string str) {
 
 void Player::playDevelopmentCard(string str, Game& game) {
     DevelopmentCard* card = stringToCard(str);
-    if (developmentCards.find(card) == developmentCards.end() || developmentCards[card] == 0) {
+    if (developmentCards.find(str) == developmentCards.end() || developmentCards[str] == 0) {
         delete card;
         throw std::logic_error("Player does not have this card");
     }
 
     card->play(*this, game);
-    developmentCards[card]--;
+    developmentCards[str]--;
     delete card;
 }
 
-void Player::removeCard(string str){
-    DevelopmentCard* card = stringToCard(str);
-    if (developmentCards.find(card) == developmentCards.end() || developmentCards[card] == 0) {
-        delete card;
+void Player::removeCard(string str) {
+    if (developmentCards.find(str) == developmentCards.end() || developmentCards[str] == 0) {
         throw std::logic_error("Player does not have this card");
     }
-
-    developmentCards[card]--;
-    delete card;
+    developmentCards[str]--;
 }
 
 unsigned int Player::numCards(std::string str) const {
-    DevelopmentCard* card = stringToCard(str);
-    if (developmentCards.find(card) == developmentCards.end()) {
-        delete card;
+    if (developmentCards.find(str) == developmentCards.end()) {
         return 0;
     }
-
-    delete card;
-    return developmentCards.at(card);
+    return developmentCards.at(str);
 }
 
 void Player::printResources() const {
@@ -149,6 +133,6 @@ void Player::printResources() const {
 void Player::printCards() const {
     cout << "Development Cards:" << endl;
     for (const auto& pair : developmentCards) {
-        cout << pair.first->toString() << ": " << pair.second << endl;
+        cout << pair.first << ": " << pair.second << endl;
     }
 }

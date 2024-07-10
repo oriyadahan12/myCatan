@@ -1,6 +1,7 @@
 #include "Resource.hpp"
 #include <stdexcept>
 
+/// @brief Converts a Resource enum value to its string representation.
 std::string resourceToString(Resource resource) {
     switch (resource) {
         case Resource::Wood: return "Wood";
@@ -12,6 +13,8 @@ std::string resourceToString(Resource resource) {
     }
 }
 
+/// @brief Converts an unsigned int to a Resource enum value.
+/// @throws std::invalid_argument if the number does not correspond to a valid resource.
 Resource intToResource(unsigned int number) {
     switch (number) {
         case 0: return Resource::Wood;

@@ -1,12 +1,14 @@
 # ninja log v6
-1898	2514	1720610234122919452	CMakeFiles/newCatan.dir/Village.cpp.o	7e5015ca2375c21
-1	26	1720618223672065862	build.ninja	b2942971514fd599
-2	1167	1720610232226896827	CMakeFiles/newCatan.dir/main.cpp.o	15be6ed6c2471e60
-3	1753	1720610232226896827	CMakeFiles/newCatan.dir/Game.cpp.o	31ce965d8c51d5de
-2931	3047	1720610235154931767	newCatan	371bb536ed4a56fe
-1613	1898	1720610233834916015	CMakeFiles/newCatan.dir/Resource.cpp.o	c146bd8241f2c4a4
 1167	1613	1720610233390910717	CMakeFiles/newCatan.dir/Plot.cpp.o	aa9275490c0dc97f
-1073	2478	1720610233298909619	CMakeFiles/newCatan.dir/Board.cpp.o	ba6d185e21099684
-2478	2931	1720610234702926373	CMakeFiles/newCatan.dir/Road.cpp.o	29735b193cc7b368
-3	1069	1720610232226896827	CMakeFiles/newCatan.dir/Player.cpp.o	3ca3cf48da2b6b77
-1753	2617	1720610233974917686	CMakeFiles/newCatan.dir/development_card.cpp.o	21618b1649110710
+2154	2589	1720624641994494840	CMakeFiles/newCatan.dir/Road.cpp.o	29735b193cc7b368
+1053	2620	1720624640894487089	CMakeFiles/newCatan.dir/Board.cpp.o	ba6d185e21099684
+2	1020	1720625150644368482	CMakeFiles/newCatan.dir/development_card.cpp.o	21618b1649110710
+3	1053	1720624639842479703	CMakeFiles/newCatan.dir/Player.cpp.o	3ca3cf48da2b6b77
+1020	1809	1720625151660383500	CMakeFiles/newCatan.dir/Tests/testPlayer.cpp.o	dd0a955a7eb8e2a2
+2616	5001	1720624642458498121	CMakeFiles/newCatan.dir/Tests/TestCounter.cpp.o	c4d6b29d8853df9f
+1	26	1720631785142087937	build.ninja	b2942971514fd599
+1994	2615	1720624641834493711	CMakeFiles/newCatan.dir/Village.cpp.o	7e5015ca2375c21
+2	1057	1720625150644368482	CMakeFiles/newCatan.dir/main.cpp.o	15be6ed6c2471e60
+2	1565	1720625150644368482	CMakeFiles/newCatan.dir/Game.cpp.o	31ce965d8c51d5de
+1613	1898	1720610233834916015	CMakeFiles/newCatan.dir/Resource.cpp.o	c146bd8241f2c4a4
+2931	3047	1720610235154931767	newCatan	371bb536ed4a56fe

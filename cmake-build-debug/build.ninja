@@ -112,6 +112,34 @@ build CMakeFiles/newCatan.dir/Road.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug
   OBJECT_DIR = CMakeFiles/newCatan.dir
   OBJECT_FILE_DIR = CMakeFiles/newCatan.dir
 
+build CMakeFiles/newCatan.dir/Tests/testPlayer.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Tests/testPlayer.cpp || cmake_object_order_depends_target_newCatan
+  DEP_FILE = CMakeFiles/newCatan.dir/Tests/testPlayer.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
+  OBJECT_DIR = CMakeFiles/newCatan.dir
+  OBJECT_FILE_DIR = CMakeFiles/newCatan.dir/Tests
+
+build CMakeFiles/newCatan.dir/Tests/TestCounter.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Tests/TestCounter.cpp || cmake_object_order_depends_target_newCatan
+  DEP_FILE = CMakeFiles/newCatan.dir/Tests/TestCounter.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
+  OBJECT_DIR = CMakeFiles/newCatan.dir
+  OBJECT_FILE_DIR = CMakeFiles/newCatan.dir/Tests
+
+build CMakeFiles/newCatan.dir/Tests/testBoard.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Tests/testBoard.cpp || cmake_object_order_depends_target_newCatan
+  DEP_FILE = CMakeFiles/newCatan.dir/Tests/testBoard.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
+  OBJECT_DIR = CMakeFiles/newCatan.dir
+  OBJECT_FILE_DIR = CMakeFiles/newCatan.dir/Tests
+
+build CMakeFiles/newCatan.dir/Tests/testGame.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug /home/magshimim/CLionProjects/myCatan/Tests/testGame.cpp || cmake_object_order_depends_target_newCatan
+  DEP_FILE = CMakeFiles/newCatan.dir/Tests/testGame.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  INCLUDES = -I/home/magshimim/CLionProjects/myCatan/cmake-build-debug
+  OBJECT_DIR = CMakeFiles/newCatan.dir
+  OBJECT_FILE_DIR = CMakeFiles/newCatan.dir/Tests
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target newCatan
@@ -120,7 +148,7 @@ build CMakeFiles/newCatan.dir/Road.cpp.o: CXX_COMPILER__newCatan_unscanned_Debug
 #############################################
 # Link the executable newCatan
 
-build newCatan: CXX_EXECUTABLE_LINKER__newCatan_Debug CMakeFiles/newCatan.dir/main.cpp.o CMakeFiles/newCatan.dir/Game.cpp.o CMakeFiles/newCatan.dir/Player.cpp.o CMakeFiles/newCatan.dir/Board.cpp.o CMakeFiles/newCatan.dir/Plot.cpp.o CMakeFiles/newCatan.dir/Resource.cpp.o CMakeFiles/newCatan.dir/development_card.cpp.o CMakeFiles/newCatan.dir/Village.cpp.o CMakeFiles/newCatan.dir/Road.cpp.o
+build newCatan: CXX_EXECUTABLE_LINKER__newCatan_Debug CMakeFiles/newCatan.dir/main.cpp.o CMakeFiles/newCatan.dir/Game.cpp.o CMakeFiles/newCatan.dir/Player.cpp.o CMakeFiles/newCatan.dir/Board.cpp.o CMakeFiles/newCatan.dir/Plot.cpp.o CMakeFiles/newCatan.dir/Resource.cpp.o CMakeFiles/newCatan.dir/development_card.cpp.o CMakeFiles/newCatan.dir/Village.cpp.o CMakeFiles/newCatan.dir/Road.cpp.o CMakeFiles/newCatan.dir/Tests/testPlayer.cpp.o CMakeFiles/newCatan.dir/Tests/TestCounter.cpp.o CMakeFiles/newCatan.dir/Tests/testBoard.cpp.o CMakeFiles/newCatan.dir/Tests/testGame.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/newCatan.dir
   POST_BUILD = :

@@ -2,13 +2,25 @@
 #include <iostream>
 #include <random>
 #include <memory>
+#include <fstream>
 
-
-Game::Game(string name1, string name2, string name3) : rng(std::random_device()()), board() {
+using namespace std;
+Game::Game(string name1, string name2, string name3, string dst) : rng(std::random_device()()), board() {
     players.emplace_back(name1);
     players.emplace_back(name2);
     players.emplace_back(name3);
     initialize_dev_cards();
+
+    if(dst == "") {
+        input_file = make_unique<std::istream>(cin.rdbuf());
+    }
+    else{
+        auto file = make_unique<ifstream>(dst);
+        if(!file->is_open()) {
+            throw std::runtime_error("Impossible open this file " + dst);
+        }
+        input_file = std::move(file);
+    }
 }
 
 void Game::initialize_dev_cards() {
@@ -126,20 +138,20 @@ void Game::firstRound() {
     unsigned int inputIndex = 999;
     for (unsigned int i = 0; i < 3; i++) {
         cout << "Hello " << players[i].getName() << ", please enter a starting position for a village" << endl;
-        cin >> inputIndex;
+        *input_file >> inputIndex;
         placeSettlement(players[i], inputIndex, true, true);
 
         cout << "Hello again " << players[i].getName() << ", please enter a starting position for a road" << endl;
-        cin >> inputIndex;
+        *input_file >> inputIndex;
         placeRoad(players[i], inputIndex, true);
     }
     for (unsigned int i = 2; 1; i--) {
         cout << "Hello " << players[i].getName() << ", please enter a starting position for a village" << endl;
-        cin >> inputIndex;
+        *input_file >> inputIndex;
         placeSettlement(players[i], inputIndex, true, true);
 
         cout << "Hello again " << players[i].getName() << ", please enter a starting position for a road" << endl;
-        cin >> inputIndex;
+        *input_file >> inputIndex;
         placeRoad(players[i], inputIndex, true);
 
         if (i == 0) break;
@@ -163,7 +175,7 @@ Game::Turn Game::chooseTurn() const {
     std::cout << "8. End Turn" << std::endl;
 
     unsigned int input = 0;
-    std::cin >> input;
+    *input_file >> input;
 
     switch (input) {
         case 1:
@@ -201,7 +213,7 @@ void Game::playTurn(Player& player) {
 
                 try {
                     cout << "Hello " << player.getName() << ", please enter a position for a road" << endl;
-                    cin >> input;
+                    *input_file >> input;
                     placeRoad(player, input);
                 } catch (const logic_error& e) {
                     cout << e.what() << endl;
@@ -211,7 +223,7 @@ void Game::playTurn(Player& player) {
             case Turn::BuildVillage:
                 try {
                     cout << "Hello " << player.getName() << ", please enter a position for a village" << endl;
-                    cin >> input;
+                    *input_file >> input;
                     placeSettlement(player, input);
                 } catch (const logic_error& e) {
                     cout << e.what() << endl;
@@ -221,7 +233,7 @@ void Game::playTurn(Player& player) {
             case Turn::UpgradeVillage:
                 try {
                     cout << "Hello " << player.getName() << ", please enter a position for a village upgrade" << endl;
-                    cin >> input;
+                    *input_file >> input;
                     upgradeSettlement(player, input);
                 } catch (const logic_error& e) {
                     cout << e.what() << endl;
@@ -231,7 +243,7 @@ void Game::playTurn(Player& player) {
 
             case Turn::PlayDevCard:
                 cout << "Hello " << player.getName() << ", please enter a development card" << endl;
-                cin >> inputString;
+                *input_file >> inputString;
                 player.playDevelopmentCard(inputString, *this);
                 break;
             case Turn::BuyDevCard:
@@ -258,15 +270,15 @@ void Game::buyCard(Player &player) {
     if (currentCard >= developmentCards.size())
         throw logic_error("No more cards left");
 
-    player.addDevelopmentCard(developmentCards[currentCard].get());
+    player.addDevelopmentCard(developmentCards[currentCard]->toString());
     currentCard++;
 }
 
-map<Resource, unsigned int> enterPrice()
+map<Resource, unsigned int> Game::enterPrice()
 {
     std::cout<<"Wood, Brick, Wool, Oats, Iron"<<std::endl;
     map<Resource,unsigned int> price;
-    std::cin >> price[Resource::Wood]>>price[Resource::Brick]>>price[Resource::Wool]>>price[Resource::Oats]>>price[Resource::Iron];
+    *input_file >> price[Resource::Wood]>>price[Resource::Brick]>>price[Resource::Wool]>>price[Resource::Oats]>>price[Resource::Iron];
     return price;
 }
 void Game::tradeResources(Player & p) {
@@ -280,10 +292,10 @@ void Game::tradeResources(Player & p) {
     for (unsigned int i = 0; i < 3; i++) {
         if (players[i].getName() == p.getName()) continue;
 
-        if (players[i].canAfford(sellPrice)) {
+        if (players[i].canAfford(buyPrice)) {
             cout << "Hello" << players[i].getName() << ", do you want to trade? (y/n)" << endl;
             char input = 'n';
-            cin >> input;
+            *input_file >> input;
             if (input != 'y') continue;
 
             p.pay(sellPrice);
@@ -296,59 +308,36 @@ void Game::tradeResources(Player & p) {
     }
 }
 
-DevelopmentCard* stringToCard2(string str) {
-    if (str == "Knight") {
-        return new KnightCard();
-    } else if (str == "Monopoly") {
-        return new MonopolyCard();
-    } else if (str == "Points") {
-        return new PointsCard();
-    } else if (str == "Roads") {
-        return new RoadsCard();
-    } else if (str == "Year of plenty") {
-        return new YearOfPlentyCard();
-    }
-    return nullptr;
-}
-
 void Game::tradeCard(Player &p) {
-    string strInput = "";
 
     std::cout<< "Enter what do you want to get. "<< std::endl;
-    cin >> strInput;
-    DevelopmentCard* buyCard = stringToCard2(strInput);
+    string buyCard = "";
+    *input_file >> buyCard;
 
     std::cout<< "Enter what do you want to give. "<< std::endl;
-    cin >> strInput;
-    DevelopmentCard* sellCard = stringToCard2(strInput);
-    if (p.numCards(strInput) == 0) {
-        delete buyCard;
-        delete sellCard;
+    string sellCard = "";
+    *input_file >> sellCard;
+    if (p.numCards(sellCard) == 0) {
         throw logic_error("Player does not have card");
     }
 
     for (unsigned int i = 0; i < 3; i++) {
         if (players[i].getName() == p.getName()) continue;
 
-        if (players[i].numCards(strInput) > 0) {
+        if (players[i].numCards(buyCard) > 0) {
             cout << "Hello" << players[i].getName() << ", do you want to trade? (y/n)" << endl;
             char input = 'n';
-            cin >> input;
+            *input_file >> input;
             if (input != 'y') continue;
 
-            p.removeCard(strInput);
+            p.removeCard(sellCard);
             players[i].addDevelopmentCard(sellCard);
 
             p.addDevelopmentCard(buyCard);
-            players[i].removeCard(strInput);
-            delete buyCard;
-            delete sellCard;
+            players[i].removeCard(buyCard);
             return;
         }
     }
-
-    delete buyCard;
-    delete sellCard;
 }
 
 void Game::start() {
@@ -364,6 +353,10 @@ void Game::start() {
             }
         }
     }
+}
+
+std::istream *Game::get_input() {
+    return input_file.get();
 }
 
 

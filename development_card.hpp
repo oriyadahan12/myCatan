@@ -20,7 +20,7 @@ public:
 class KnightCard : public DevelopmentCard {
     virtual std::string toString() const override
     {
-        return "Knight Card";
+        return "Knight";
     }
 
     virtual void play(Player& player, Game& game) override;
@@ -30,7 +30,7 @@ class KnightCard : public DevelopmentCard {
 class MonopolyCard : public DevelopmentCard {
     virtual std::string toString() const override
     {
-            return "Monopoly Card";
+            return "Monopoly";
     }
 
     void play(Player& player, Game& game) override;
@@ -39,7 +39,7 @@ class MonopolyCard : public DevelopmentCard {
 class PointsCard : public DevelopmentCard {
     virtual std::string toString() const override
     {
-        return "Points Card";
+        return "Points";
     }
 
      void play(Player& player, Game& game) override;
@@ -48,7 +48,7 @@ class PointsCard : public DevelopmentCard {
 class RoadsCard : public DevelopmentCard {
     virtual std::string toString() const override
     {
-        return "Roads Card";
+        return "Roads";
     }
 
      void play(Player& player, Game& game) override;
@@ -57,7 +57,7 @@ class RoadsCard : public DevelopmentCard {
 class YearOfPlentyCard : public DevelopmentCard {
     virtual std::string toString() const override
     {
-        return "Year of plenty Card";
+        return "Year of plenty";
     }
 
     void play(Player& player, Game& game) override ;

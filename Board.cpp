@@ -123,6 +123,9 @@ void Board::upgradeVillage(Player& player, unsigned int villageIndex){
 
 bool Board::canBuildRoad(Player& player, unsigned int roadIndex) const
 {
+    if(roads[roadIndex].isBuilt()){
+        return false;
+    }
     for(unsigned int i = 0; i < SETTELMENTS_ROADS.size(); i++)
     {
         for(unsigned int j = 0; j < SETTELMENTS_ROADS[i].size(); j++){
@@ -172,6 +175,9 @@ std::string Board::toString() const {
 }
 
 bool Board::canBuildFirstVillage(Player &player, unsigned int villageIndex) const {
+    if (villages[villageIndex].isbuilt()){
+        return false;
+    }
     for(unsigned int i = 0; i < SETTELMENTS_NEIGHBORS[villageIndex].size(); i++)
     {
         if (villages[SETTELMENTS_NEIGHBORS[villageIndex][i]].isbuilt()){

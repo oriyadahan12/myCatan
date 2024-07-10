@@ -24,6 +24,9 @@ public:
     bool canBuildVillage(Player& player, unsigned int villageIndex) const;
     bool canUpgradeVillage(Player& player, unsigned int villageIndex) const;
 
+    bool isThereRoad(unsigned int index) const { return roads[index].isBuilt(); }
+    bool isThereVillage(unsigned int index) const { return villages[index].isbuilt(); }
+
     std::string toString() const;
 
 

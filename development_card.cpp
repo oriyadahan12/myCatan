@@ -15,15 +15,16 @@ void KnightCard::play(Player &player, Game &game) {
 void MonopolyCard::play(Player &player, Game &game) {
     std::cout << "enter resource please: " << std::endl;
     unsigned int input = 0;
-    cin >> input;
+    *game.get_input() >> input;
     Resource resource = intToResource(input);
+    cout << "resource: " << resourceToString(resource) << endl;
 
     for (unsigned int i = 0; i < 3; i++) {
         if (player.getName() == game.getPlayer(i).getName()) continue;
 
         unsigned int transfer = game.getPlayer(i).getResourceCount(resource);
-        game.getPlayer(i).loseResource(resource);
-        game.getPlayer(i).addResource(resource, transfer);
+        game.getPlayer(i).loseResource(resource, transfer);
+        player.addResource(resource, transfer);
     }
 }
 
@@ -36,7 +37,7 @@ void RoadsCard::play(Player &player, Game &game) {
         try {
             std::cout << "enter index for road please: " << std::endl;
             unsigned int input = 0;
-            cin >> input;
+            *game.get_input() >> input;
             game.placeRoad(player, input);
             break;
         } catch (const std::exception& e) {
@@ -47,7 +48,7 @@ void RoadsCard::play(Player &player, Game &game) {
         try {
             std::cout << "enter index for road please: " << std::endl;
             unsigned int input = 0;
-            cin >> input;
+            *game.get_input() >> input;
             game.placeRoad(player, input);
             break;
         } catch (const std::exception& e) {
@@ -60,12 +61,12 @@ void RoadsCard::play(Player &player, Game &game) {
 void YearOfPlentyCard::play(Player &player, Game &game) {
     std::cout << "enter resource please: " << std::endl;
     unsigned int input = 0;
-    cin >> input;
+    *game.get_input() >> input;
     Resource resource = intToResource(input);
     player.addResource(resource, 1);
 
     std::cout << "enter resource please: " << std::endl;
-    cin >> input;
+    *game.get_input() >> input;
     resource = intToResource(input);
     player.addResource(resource, 1);
 }
