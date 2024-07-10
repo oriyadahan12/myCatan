@@ -6,54 +6,66 @@
 
 using namespace std;
 Game::Game(string name1, string name2, string name3, string dst) : rng(std::random_device()()), board() {
+    // Initialize players
     players.emplace_back(name1);
     players.emplace_back(name2);
     players.emplace_back(name3);
+
+    // Initialize development cards randomly
     initialize_dev_cards();
 
+    // Set input source based on 'dst'
     if(dst == "") {
         input_file = make_unique<std::istream>(cin.rdbuf());
     }
-    else{
+    else {
         auto file = make_unique<ifstream>(dst);
         if(!file->is_open()) {
-            throw std::runtime_error("Impossible open this file " + dst);
+            throw std::runtime_error("Cannot open file: " + dst);
         }
         input_file = std::move(file);
     }
 }
 
 void Game::initialize_dev_cards() {
-        unsigned int knights = 3;
-        unsigned int roads = 3;
-        unsigned int monopolies = 4;
-        unsigned int years = 4;
-        unsigned int points = 4;
-        unsigned int sum = knights + roads + monopolies + years + points;
-        developmentCards.resize(sum);
-        for (unsigned int i = 0; i < sum; i++) {
-            int r = rand()%5;
-            if (r == 0 && knights > 0) {
-                developmentCards[i] = make_unique<KnightCard>();
-                knights--;
-            }
-             else if (r == 2 && monopolies > 0) {
-                developmentCards[i] = make_unique<MonopolyCard>();
-                monopolies--;
-            }
-            else if (r == 4 && points > 0) {
-                developmentCards[i] = make_unique<PointsCard>();
-                points--;}
-            else if (r == 3 && years > 0) {
-                developmentCards[i] = make_unique<YearOfPlentyCard>();
-                years--;
-            }
-            else if (r == 1 && roads > 0) {
-                developmentCards[i] = make_unique<RoadsCard>();
-                roads--;
-            }else i--;
+    unsigned int knights = 3;
+    unsigned int roads = 3;
+    unsigned int monopolies = 4;
+    unsigned int years = 4;
+    unsigned int points = 4;
+    unsigned int sum = knights + roads + monopolies + years + points;
+
+    developmentCards.resize(sum);
+
+    // Populate developmentCards with random types
+    for (unsigned int i = 0; i < sum; i++) {
+        int r = rand()%5;
+        if (r == 0 && knights > 0) {
+            developmentCards[i] = make_unique<KnightCard>();
+            knights--;
         }
+        else if (r == 1 && roads > 0) {
+            developmentCards[i] = make_unique<RoadsCard>();
+            roads--;
+        }
+        else if (r == 2 && monopolies > 0) {
+            developmentCards[i] = make_unique<MonopolyCard>();
+            monopolies--;
+        }
+        else if (r == 3 && years > 0) {
+            developmentCards[i] = make_unique<YearOfPlentyCard>();
+            years--;
+        }
+        else if (r == 4 && points > 0) {
+            developmentCards[i] = make_unique<PointsCard>();
+            points--;
+        }
+        else {
+            i--; // Retry if none of the conditions were met
+        }
+    }
 }
+
 
 Player& Game::getPlayer(unsigned int index) {
     return players.at(index);

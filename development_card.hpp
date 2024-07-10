@@ -8,60 +8,85 @@
 
 class Game;
 class Player;
+
 using namespace std;
 
+/**
+ * @brief Abstract base class for Development Cards.
+ */
 class DevelopmentCard {
 public:
     virtual ~DevelopmentCard() = default;
+
+    /**
+     * @brief Returns a string representation of the card.
+     */
     virtual std::string toString() const = 0;
-    virtual void play(Player&, Game&) = 0;//function without implementation.
+
+    /**
+     * @brief Performs the action associated with playing the card.
+     */
+    virtual void play(Player& player, Game& game) = 0;
 };
 
+/**
+ * @brief Concrete class representing a Knight card.
+ */
 class KnightCard : public DevelopmentCard {
-    virtual std::string toString() const override
-    {
+public:
+    virtual std::string toString() const override {
         return "Knight";
     }
 
     virtual void play(Player& player, Game& game) override;
-
 };
 
+/**
+ * @brief Concrete class representing a Monopoly card.
+ */
 class MonopolyCard : public DevelopmentCard {
-    virtual std::string toString() const override
-    {
-            return "Monopoly";
+public:
+    virtual std::string toString() const override {
+        return "Monopoly";
     }
 
-    void play(Player& player, Game& game) override;
+    virtual void play(Player& player, Game& game) override;
 };
 
+/**
+ * @brief Concrete class representing a Points card.
+ */
 class PointsCard : public DevelopmentCard {
-    virtual std::string toString() const override
-    {
+public:
+    virtual std::string toString() const override {
         return "Points";
     }
 
-     void play(Player& player, Game& game) override;
+    virtual void play(Player& player, Game& game) override;
 };
 
+/**
+ * @brief Concrete class representing a Roads card.
+ */
 class RoadsCard : public DevelopmentCard {
-    virtual std::string toString() const override
-    {
+public:
+    virtual std::string toString() const override {
         return "Roads";
     }
 
-     void play(Player& player, Game& game) override;
+    virtual void play(Player& player, Game& game) override;
 };
 
+/**
+ * @brief Concrete class representing a Year of Plenty card.
+ */
 class YearOfPlentyCard : public DevelopmentCard {
-    virtual std::string toString() const override
-    {
+public:
+    virtual std::string toString() const override {
         return "Year of plenty";
     }
 
-    void play(Player& player, Game& game) override ;
-
+    virtual void play(Player& player, Game& game) override;
 };
 
 #endif // DEVELOPMENT_CARD_H
